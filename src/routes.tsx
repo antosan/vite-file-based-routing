@@ -8,7 +8,9 @@ const preserved = Object.keys(PRESERVED).reduce<{ [key: string]: ComponentType }
   const key = file.replace(/\/src\/pages\/|\.tsx$/g, '');
   const component: ComponentType = PRESERVED[file].default;
 
-  return { ...preserved, [key]: component };
+  preserved[key] = component;
+
+  return preserved;
 }, {});
 
 const routes = Object.keys(ROUTES).map((route) => {
